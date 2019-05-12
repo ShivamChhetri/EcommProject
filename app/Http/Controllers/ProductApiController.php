@@ -15,7 +15,10 @@ class ProductApiController extends Controller
                     INNER JOIN product_pics
                     ON products.id = product_pics.product_id'
                     );
-        return $products;
+        if($products){
+            return $products;
+        }
+        return response()->json(['error'=>"no product found"]);
     }
 
 
@@ -31,10 +34,14 @@ class ProductApiController extends Controller
         if($product){
             return $product;
         }
-        return response()->json("no product found");
+        return response()->json(['error'=>"no product found"]);
     }
 
 
+    public function type($type){
+        $product= Product::where('type',$type)->get();
+        return $product;
+    }
     // SORTING
     public function priceSort($bool){
         // $bool(0 acsending, 1 Descending)
@@ -56,7 +63,7 @@ class ProductApiController extends Controller
         if($products){
             return $products;
         }
-        return response()->json("no product found");
+        return response()->json(['error'=>"no product found"]);
     }
 
 
@@ -80,7 +87,7 @@ class ProductApiController extends Controller
         if($products){
             return $products;
         }
-        return response()->json("no product found");        
+        return response()->json(['error'=>"no product found"]);        
     }
 
     public function discountSort($percent){
@@ -93,6 +100,6 @@ class ProductApiController extends Controller
         if($product){
             return $product;
         }
-        return response()->json("no product found");
+        return response()->json(['error'=>"no product found"]);
     }
 }

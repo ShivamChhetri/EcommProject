@@ -41,7 +41,13 @@ class AdminProductsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-                'name' => 'required'
+                'name' => 'required',
+                'type' => 'required',
+                'description' => 'required',
+                'available_quantity'=> 'required',
+                'price' => 'required',
+                'discount_percent' => 'required',
+                'updated_by' =>  'required'
         ]);
 
         $product= new Product;
